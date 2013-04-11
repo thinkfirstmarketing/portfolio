@@ -1,0 +1,104 @@
+<!-- 
+    This is the file that controls the display of the iPad cases to the user. The information that was included in the locals() command in the controller is passed through to this page. 
+-->
+
+<!--Go to the "base.html" file and grab the general structure for all pages (i.e. scripts, styles, and header/footer-->
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+<!--allows this page to control the <title> element of the page -->
+{% block title %}iPad Cases | iPad Covers | New iPad Cases | domeo products{% endblock %}
+
+<!--add special meta tags to the page for SEO purposes -->
+{% block head %}
+<meta name="description" content="domeo products have great new iPad cases that you will not want to miss out on! See how our iPad cases can transform your iPad experience.">
+<meta name="keywords" content="">
+{% endblock %}
+
+<!--extra generic information that shouldn't be included in the base.html file -->
+{% block body_class %}productslanding{% endblock %}
+
+
+<!--this is where the majority of this page is displayed. This just says, in the middle of that base.html file, add this content-->
+{% block content %}
+
+<div class="landing-container cf">
+    {% include "social-bar.html" %}
+    <div class="wrapper cf">
+        <div class="left">
+            <ul>
+                <li>iPad Cases
+                    <ul>
+                        <!--iterate through the products and create the sidebar links-->
+                        {% for product in products %}
+                        {% if product.slug != 'grip-mini-folio-ipad-case' %}
+                        <li><a href="{% url detail product.slug %}">{{ product.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li>iPad Mini Cases
+                    <ul>
+                        <!--same as above-->
+                        {% for product in products %}
+                        {% if product.slug == 'grip-mini-folio-ipad-case' %}
+                        <li><a href="{% url detail product.slug %}">{{ product.name }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% comment %}<li>iPad Accessories</li>{% endcomment %}
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <!--iterate through the products and display all of their information -->
+            {% for product in products %}
+            <div class="landing-product-container">
+                <a href="{% url detail product.slug %}"><span class="link-spanner"></span></a>
+                {% thumbnail product.colorscheme_set.all.0.colorschemeimage_set.all.0.image "180" format="PNG" as im %}
+                    <img class="thumbnail" src="{{ im.url }}" style="margin:{{ im|margin:"210x180" }}" alt="" />
+                {% endthumbnail %}
+                <h3>{{ product.name }}</h3>
+                {% if product.has_ratings %}
+                <div class="star-rating">
+                    {% for star in product.full_stars %}
+                        <img src="{{ STATIC_URL }}images/full-star.png" alt="star" />
+                    {% endfor %}
+                    {% if product.half_star %}
+                        <img src="{{ STATIC_URL }}images/half-star.png" alt="star" />
+                    {% endif %}
+                    {% for star in product.empty_stars %}
+                        <img src="{{ STATIC_URL }}images/empty-star.png" alt="star" />
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {{ product.bullets|safe }}
+                <a href="{% url detail product.slug %}" class="blue-button">Shop Now</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="landing-about-container">
+    <h3>About domeo</h3>
+    <p>From the moment you open the package to the day you realize you can't
+    live without it, domeo is all about delivering maximum comfort and quality
+    to your iPad experience. Every material is carefully chosen. Every viewing
+    angle meticulously studied. All in order to insure your comfort.  We have
+    coupled our personal experience as iPad users with hours of research into
+    the ways users utilize technology in their everyday lives.  That research
+    and experience tells us that most people use the iPad at home relaxing and
+    our products are designed to enhance that experience.</p>
+
+    <p>Here at domeo, we aren't just engineers and sales reps. Just like you,
+    we are chefs, international travelers, movie buffs, and music lovers. And
+    just like you, we want to use our iPads for play as well as work. So when
+    we decided to launch a new and innovative brand of iPad products, we did so
+    with our personal experiences in mind. domeo products are about integrating
+    the iPad comfortably into everyday life.</p>
+</div>
+
+
+{% endblock %}
+{% block footer_page_name %}Products{% endblock %}

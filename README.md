@@ -20,4 +20,14 @@ Included in this portfolio are some coding examples from clients that our develo
 
 
 <b>Develop for the end user to have control</b>
-Rather than cutting corners and simply hard-coding the values of text on the screen, we take the extra step finding out from the user what information they want to have control over so that they can change those moving forward. 
+Rather than cutting corners and simply hard-coding the values of text on the screen, we take the extra step finding out from the user what information they want to have control over so that they can change those moving forward.
+
+<h2>In this Portfolio</h2>
+
+Included in this portfolio are some small examples from projects that we've worked on in the past: 
+
+The php example is from a php project written in a framework called Laravel. It's an excellent little framework (fairly new) that does an excellent job of helping PHP focus on being MVC and ORM complient. 
+
+The second is from a Django project that we worked on recently that is a front end for a webstore for selling iPad accessories. It was written in the Django python web framework. 
+
+ 
